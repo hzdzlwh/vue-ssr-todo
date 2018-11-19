@@ -14,45 +14,45 @@
 
 <script>
 export default {
-    name: 'Notification',
-    props: {
-        content: {
-            type: String,
-            required: true
-        },
-        btn: {
-            type: String,
-            default: '关闭'
-        }
+  name: 'Notification',
+  props: {
+    content: {
+      type: String,
+      required: true
     },
-    data() {
-        return {
-            visible: true
-        }
-    },
-    computed: {
-        style() {
-            return {}
-        }
-    },
-    methods: {
-        handleClose(e) {
-            e.preventDefault()
-            this.$emit('close')
-        },
-        afterLeave() {
-            this.$emit('closed')
-        },
-        mouseOver() {
-            this.$emit('mouseOver')
-        },
-        mouseOut() {
-            this.$emit('mouseOut')
-        },
-        afterEnter() {},
-        createTimer() {},
-        clearTimer() {}
+    btn: {
+      type: String,
+      default: '关闭'
     }
+  },
+  data () {
+    return {
+      visible: true
+    }
+  },
+  computed: {
+    style () {
+      return {}
+    }
+  },
+  methods: {
+    handleClose (e) {
+      e.preventDefault()
+      this.$emit('close')
+    },
+    afterLeave () {
+      this.$emit('closed')
+    },
+    mouseOver () {
+      this.$emit('mouseOver')
+    },
+    mouseOut () {
+      this.$emit('mouseOut')
+    },
+    afterEnter () {},
+    createTimer () {},
+    clearTimer () {}
+  }
 }
 </script>
 

@@ -30,8 +30,8 @@
 
 <script>
 import {
-    mapState,
-    mapActions
+  mapState,
+  mapActions
 } from 'vuex'
 import Item from './item.vue'
 import Helper from './helper.vue'
@@ -39,7 +39,7 @@ let id = 0
 
 export default {
   metaInfo: {
-      title: 'todo'
+    title: 'todo'
   },
   data () {
     return {
@@ -49,17 +49,17 @@ export default {
       stats: ['all', 'active', 'completed']
     }
   },
-  mounted() {
-      if (this.todos && this.todos.length < 1) {
-          this.fetchTodos()
-      }
+  mounted () {
+    if (this.todos && this.todos.length < 1) {
+      this.fetchTodos()
+    }
   },
-  asyncData({ store, router }) {
-      if (store.state.user) {
-          return store.dispatch('fetchTodos')
-      }
-      router.replace('/login')
-      return Promise.resolve()
+  asyncData ({ store, router }) {
+    if (store.state.user) {
+      return store.dispatch('fetchTodos')
+    }
+    router.replace('/login')
+    return Promise.resolve()
   },
   components: {
     Item,
@@ -67,7 +67,7 @@ export default {
   },
   computed: {
     ...mapState([
-        'todos'
+      'todos'
     ]),
     filteredTodos () {
       if (this.filter === 'all') {
@@ -79,40 +79,40 @@ export default {
   },
   methods: {
     ...mapActions([
-        'fetchTodos',
-        'addTodo',
-        'deleteTodo',
-        'updateTodo',
-        'deleteAllCompleted'
+      'fetchTodos',
+      'addTodo',
+      'deleteTodo',
+      'updateTodo',
+      'deleteAllCompleted'
     ]),
     handleAdd (e) {
       const content = e.target.value.trim()
       if (!content) {
-          this.$notify({
-              content: '必须输入要做的内容'
-          })
-          return
+        this.$notify({
+          content: '必须输入要做的内容'
+        })
+        return
       }
       const todo = {
-          content,
-          completed: false
+        content,
+        completed: false
       }
       this.addTodo(todo)
       e.target.value = ''
     },
     toggleTodoState (todo) {
-        this.updateTodo({
-            id: todo.id,
-            todo: Object.assign({}, todo, {
-                completed: !todo.completed
-            })
+      this.updateTodo({
+        id: todo.id,
+        todo: Object.assign({}, todo, {
+          completed: !todo.completed
         })
+      })
     },
     clearAllCompleted () {
       this.deleteAllCompleted()
     },
-    tabChange(index) {
-        this.filter = index
+    tabChange (index) {
+      this.filter = index
     }
   }
 }

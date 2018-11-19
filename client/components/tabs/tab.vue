@@ -1,42 +1,42 @@
 <script>
 export default {
-    name: 'Tab',
-    props: {
-        index: {
-            type: [String, Number],
-            required: true
-        },
-        label: {
-            type: String,
-            default: 'tab'
-        }
+  name: 'Tab',
+  props: {
+    index: {
+      type: [String, Number],
+      required: true
     },
-    inject: ['data'],
-    computed: {
-        active() {
-            return this.data.value === this.index
-        }
-    },
-    mounted() {
-        this.$parent.panes.push(this)
-    },
-    render() {
-        const tab = this.$slots.label || <span>{this.label}</span>
-        const classNames = {
-            tab: true,
-            active: this.active
-        }
-        return (
-            <li class={classNames} on-click={this.handleClick}>
-                {tab}
-            </li>
-        )
-    },
-    methods: {
-        handleClick() {
-            this.$parent.onChange(this.index)
-        }
+    label: {
+      type: String,
+      default: 'tab'
     }
+  },
+  inject: ['data'],
+  computed: {
+    active () {
+      return this.data.value === this.index
+    }
+  },
+  mounted () {
+    this.$parent.panes.push(this)
+  },
+  render () {
+    const tab = this.$slots.label || <span>{this.label}</span>
+    const classNames = {
+      tab: true,
+      active: this.active
+    }
+    return (
+      <li class={classNames} on-click={this.handleClick}>
+        {tab}
+      </li>
+    )
+  },
+  methods: {
+    handleClick () {
+      this.$parent.onChange(this.index)
+    }
+  }
 }
 </script>
 

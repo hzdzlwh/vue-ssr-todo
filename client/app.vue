@@ -22,7 +22,7 @@ import Loading from './components/loading/loading.vue'
 
 export default {
   metaInfo: {
-      title: 'Jokcy todo app'
+    title: 'Jokcy todo app'
   },
   components: {
     Header,
@@ -30,21 +30,21 @@ export default {
     Todo,
     Loading
   },
-  mounted() {
+  mounted () {
 
   },
   computed: {
-      ...mapState([
-          'loading'
-      ])
+    ...mapState([
+      'loading'
+    ])
   },
   methods: {
-      notify() {
-          this.$notify({
-              content: 'test $notify',
-              btn: 'close'
-          })
-      }
+    notify () {
+      this.$notify({
+        content: 'test $notify',
+        btn: 'close'
+      })
+    }
   }
 }
 </script>

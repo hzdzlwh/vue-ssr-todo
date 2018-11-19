@@ -18,14 +18,14 @@ Vue.use(Notification)
 Vue.use(Tabs)
 
 export default () => {
-    const router = createRouter()
-    const store = createStore()
+  const router = createRouter()
+  const store = createStore()
 
-    const app = new Vue({
-        router,
-        store,
-        render: h => h(App)
-    })
+  const app = new Vue({
+    router,
+    store,
+    render: h => h(App)
+  })
 
-    return { app, router, store }
+  return { app, router, store }
 }

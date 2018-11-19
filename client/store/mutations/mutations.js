@@ -7,31 +7,31 @@ export default {
     state.todos = todos
   },
   addTodo (state, todo) {
-      state.todos.unshift(todo)
+    state.todos.unshift(todo)
   },
   updateTodo (state, { id, todo }) {
-      state.todos.splice(
-          state.todos.findIndex(t => t.id === id),
-          1,
-          todo
-      )
+    state.todos.splice(
+      state.todos.findIndex(t => t.id === id),
+      1,
+      todo
+    )
   },
   deleteTodo (state, id) {
-      state.todos.splice(
-          state.todos.findIndex(t => t.id === id),
-          1
-      )
+    state.todos.splice(
+      state.todos.findIndex(t => t.id === id),
+      1
+    )
   },
   deleteAllCompleted (state) {
-      state.todos = state.todos.filter(t => !t.completed)
+    state.todos = state.todos.filter(t => !t.completed)
   },
   doLogin (state, userInfo) {
-      state.user = userInfo
+    state.user = userInfo
   },
   startLoading (state) {
-      state.loading = true
+    state.loading = true
   },
   endLoading (state) {
-      state.loading = false
+    state.loading = false
   }
 }

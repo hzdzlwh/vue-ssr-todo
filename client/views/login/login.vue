@@ -25,45 +25,45 @@
 import { mapActions } from 'vuex'
 
 export default {
-    metaInfo: {
-        title: 'login'
-    },
-    data() {
-        return {
-            username: '',
-            password: '',
-            errorMsg: ''
-        }
-    },
-    methods: {
-        ...mapActions([
-            'login'
-        ]),
-        doSubmit(e) {
-            e.preventDefault()
-            if (this.validate) {
-                this.login({
-                    username: this.username,
-                    password: this.password
-                })
-                .then(() => {
-                    this.$router.replace('/app')
-                })
-            }
-        },
-        validate () {
-          if (!this.username.trim()) {
-            this.errorMsg = '姓名不能为空'
-            return false
-          }
-          if (!this.password.trim()) {
-            this.errorMsg = '密码不能为空'
-            return false
-          }
-          this.errorMsg = ''
-          return true
-        }
+  metaInfo: {
+    title: 'login'
+  },
+  data () {
+    return {
+      username: '',
+      password: '',
+      errorMsg: ''
     }
+  },
+  methods: {
+    ...mapActions([
+      'login'
+    ]),
+    doSubmit (e) {
+      e.preventDefault()
+      if (this.validate) {
+        this.login({
+          username: this.username,
+          password: this.password
+        })
+          .then(() => {
+            this.$router.replace('/app')
+          })
+      }
+    },
+    validate () {
+      if (!this.username.trim()) {
+        this.errorMsg = '姓名不能为空'
+        return false
+      }
+      if (!this.password.trim()) {
+        this.errorMsg = '密码不能为空'
+        return false
+      }
+      this.errorMsg = ''
+      return true
+    }
+  }
 }
 </script>
 

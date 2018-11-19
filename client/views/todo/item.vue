@@ -24,8 +24,8 @@ export default {
       this.$emit('del', this.todo.id)
     },
     handleToggle (e) {
-        e.preventDefault()
-        this.$emit('toggle', this.todo)
+      e.preventDefault()
+      this.$emit('toggle', this.todo)
     }
   }
 }
