@@ -4,11 +4,11 @@
 export default [
   {
     path: '/',
-    redirect: '/app'
+    redirect: '/appssr'
   },
   {
     // path: '/app/:id', // /app/xxx
-    path: '/app',
+    path: '/appssr',
     props: true,
     // props: (route) => ({ id: route.query.b }),
     component: () => import(/* webpackChunkName: "todo-view" */ '../views/todo/todo.vue'),
