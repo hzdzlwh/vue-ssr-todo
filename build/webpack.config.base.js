@@ -14,10 +14,10 @@ const config = {
   module: {
     rules: [
       {
-          test: /\.(vue|js|jsx)$/,
-          loader: 'eslint-loader',
-          exclude: /node_modules/,
-          enforce: 'pre'
+        test: /\.(vue|js|jsx)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        enforce: 'pre'
       },
       {
         test: /\.vue$/,
@@ -30,9 +30,9 @@ const config = {
         loader: 'babel-loader'
       },
       {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /mode_modules/
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /mode_modules/
       },
       {
         test: /\.(gif|jpg|jpeg|png|svg)$/,
@@ -49,6 +49,5 @@ const config = {
     ]
   }
 }
-
 
 module.exports = config

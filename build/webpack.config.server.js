@@ -18,7 +18,7 @@ const plugins = [
 ]
 
 if (isDev) {
-    plugins.push(new VueServerPlugin())
+    plugins.push(new VueServerPlugin())  // 引入此插件不会生成js文件，会生成一个json文件
 }
 
 config = merge(baseConfig, {
@@ -26,7 +26,7 @@ config = merge(baseConfig, {
     entry: path.join(__dirname, '../client/server-entry.js'),
     devtool: 'source-map',
     output: {
-        libraryTarget: 'commonjs2',
+        libraryTarget: 'commonjs2',   // 打包后的是module.exports
         filename: 'server-entry.js',
         path: path.join(__dirname, '../server-build')
     },

@@ -21,7 +21,7 @@ import Todo from './views/todo/todo.vue'
 import Loading from './components/loading/loading.vue'
 
 export default {
-  metaInfo: {
+  metaInfo: {  // vue-meta 读取到此信息就会改页面的title信息
     title: 'Jokcy todo app'
   },
   components: {

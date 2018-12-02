@@ -2,7 +2,7 @@ import axios from 'axios'
 import { createError } from './util'
 
 const request = axios.create({
-  baseURL: '/'
+  baseURL: '/' // 给自己的服务器发请求，不需要指定host和port，直接用绝对路径
 })
 
 const handleRequest = (request) => {

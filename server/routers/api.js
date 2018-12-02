@@ -1,7 +1,8 @@
 const Router = require('koa-router')
 
-const apiRouter = new Router({ prefix: '/api' })
+const apiRouter = new Router({ prefix: '/api' })  // 只处理api开头的
 
+// 登录的验证
 const validateUser = async (ctx, next) => {
     if (!ctx.session.user) {
         ctx.status = 401
@@ -21,7 +22,7 @@ const successResponse = (data) => {
 }
 
 apiRouter
-    .get('/todos', async (ctx) => {
+    .get('/todos', async (ctx) => {  // 获取所有todo
         const todos = await ctx.db.getAllTodos()
         todos.map(item => {
             if (item.completed === 'false') {
@@ -32,7 +33,7 @@ apiRouter
         })
         ctx.body = successResponse(todos)
     })
-    .post('/todo', async (ctx) => {
+    .post('/todo', async (ctx) => {  // 创建todo
         const data = await ctx.db.addTodo(ctx.request.body)
         ctx.body = successResponse(data)
     })

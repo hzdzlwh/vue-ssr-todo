@@ -14,13 +14,13 @@ const devServer = {
   port: 8000,
   host: '0.0.0.0',
   overlay: {
-    errors: true,
+    errors: true
   },
   headers: { 'Access-Control-Allow-Origin': '*' },
   historyApiFallback: {
-      index: '/public/index.html'
+    index: '/public/index.html'
   },
-  proxy: {
+  proxy: {// 此代理是为了解决在开发是服务端请求客户端静态资源的问题
     '/api': 'http://127.0.0.1:3333',
     '/user': 'http://127.0.0.1:3333'
   },
@@ -28,92 +28,91 @@ const devServer = {
 }
 
 const defaultPlugin = [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: isDev ? '"development"' : '"production"'
-      }
-    }),
-    new HTMLPlugin({
-        template: path.join(__dirname, 'template.html')
-    }),
-    new VueClientPlugin()
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: isDev ? '"development"' : '"production"'
+    }
+  }),
+  new HTMLPlugin({
+    template: path.join(__dirname, 'template.html')
+  }),
+  new VueClientPlugin()
 ]
 
 if (isDev) {
-    config = merge(baseConfig, {
-        devtool: '#cheap-module-eval-source-map',
-        module: {
-            rules: [
-                {
-                  test: /\.styl/,
-                  use: [
-                    'vue-style-loader',
-                    'css-loader',
-                    {
-                      loader: 'postcss-loader',
-                      options: {
-                        sourceMap: true,
-                      }
-                    },
-                    'stylus-loader'
-                  ]
-                }
-            ]
-        },
-        devServer,
-        plugins: defaultPlugin.concat([
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoEmitOnErrorsPlugin()
-        ])
-    })
-
+  config = merge(baseConfig, {
+    devtool: '#cheap-module-eval-source-map',
+    module: {
+      rules: [
+        {
+          test: /\.styl/,
+          use: [
+            'vue-style-loader',
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            'stylus-loader'
+          ]
+        }
+      ]
+    },
+    devServer,
+    plugins: defaultPlugin.concat([
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin()
+    ])
+  })
 } else {
-    config = merge(baseConfig, {
-        entry: {
-            app: path.join(__dirname, '../client/client-entry.js'),
-            vendor: ['vue']
-        },
-        output: {
-            filename: '[name].[chunkhash:8].js',
-            publicPath: '/public/'
-        },
-        module: {
-            rules: [
-                {
-                  test: /\.styl/,
-                  use: ExtractPlugin.extract({
-                    fallback: 'vue-style-loader',
-                    use: [
-                      'css-loader',
-                      {
-                        loader: 'postcss-loader',
-                        options: {
-                          sourceMap: true,
-                        }
-                      },
-                      'stylus-loader'
-                    ]
-                  })
+  config = merge(baseConfig, {
+    entry: {
+      app: path.join(__dirname, '../client/client-entry.js'),
+      vendor: ['vue']
+    },
+    output: {
+      filename: '[name].[chunkhash:8].js',
+      publicPath: '/public/'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.styl/,
+          use: ExtractPlugin.extract({
+            fallback: 'vue-style-loader',
+            use: [
+              'css-loader',
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true
                 }
+              },
+              'stylus-loader'
             ]
-        },
-        plugins: defaultPlugin.concat([
-            new ExtractPlugin('styles.[contentHash:8].css'),
-            new webpack.optimize.CommonsChunkPlugin({
-              name: 'vendor'
-            }),
-            new webpack.optimize.CommonsChunkPlugin({
-              name: 'runtime'
-            }),
-            new webpack.NamedChunksPlugin()
-        ])
-    })
+          })
+        }
+      ]
+    },
+    plugins: defaultPlugin.concat([
+      new ExtractPlugin('styles.[contentHash:8].css'),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'runtime'
+      }),
+      new webpack.NamedChunksPlugin()
+    ])
+  })
 }
 
 config.resolve = {
-    alias: {
-        'model': path.join(__dirname, '../client/model/client-model.js')
-    }
+  alias: {
+    'model': path.join(__dirname, '../client/model/client-model.js')
+  }
 }
 
 module.exports = config

@@ -8,7 +8,7 @@ const handleError = (err) => {
     notify({
       content: '你得先登录'
     })
-    bus.$emit('auth')
+    bus.$emit('auth') // 未登录或请求过期时触发，在client-entry.js中接受
   }
 }
 

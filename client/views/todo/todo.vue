@@ -38,7 +38,7 @@ import Helper from './helper.vue'
 let id = 0
 
 export default {
-  metaInfo: {
+  metaInfo: {  // 下级组件meta覆盖上级组件
     title: 'todo'
   },
   data () {
@@ -50,13 +50,13 @@ export default {
     }
   },
   mounted () {
-    if (this.todos && this.todos.length < 1) {
+    if (this.todos && this.todos.length < 1) {  // 判断前端是否有必要进行数据请求
       this.fetchTodos()
     }
   },
   asyncData ({ store, router }) {
     if (store.state.user) {
-      return store.dispatch('fetchTodos')
+      return store.dispatch('fetchTodos')  // fetchTodos默认没有返回，要在actions里面添加return
     }
     router.replace('/login')
     return Promise.resolve()

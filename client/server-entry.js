@@ -10,23 +10,25 @@ export default context => { // 此处的context就是server-render.js中传入�
 
     router.push(context.url)
 
-    router.onReady(() => {
-      const matchedComponents = router.getMatchedComponents()
+    router.onReady(() => {  // 在上一步push的路由里所有异步操作都执行完了
+      // 主要做一些服务端获取数据的操作
 
+      const matchedComponents = router.getMatchedComponents()  // 根据url配置响应的组件
       if (!matchedComponents.length) {
         return reject(new Error('no component matched'))
       }
+
       Promise.all(matchedComponents.map(Component => {
         if (Component.asyncData) {
           return Component.asyncData({
             route: router.currentRoute,
-            router,
+            router,  // 把整个router对象传过去
             store
           })
         }
       })).then(data => {
-        context.meta = app.$meta()
-        context.state = store.state
+        context.meta = app.$meta()  // 服务端渲染使用vue-meta的方式
+        context.state = store.state  // 指定context.state = store.state
         context.router = router
         resolve(app)
       })

@@ -8,7 +8,8 @@ module.exports = async (ctx, renderer, template, bundle) => {
     try {
         // const appString = await renderer.renderToString(context)
         const app = await bundle(context)
-
+        
+        // 此处先进行redirect，后进行renderToString，优化点在此,如果redirect是不会走到renderToString的，renderToString是最耗费资源的
         if (context.router.currentRoute.fullPath !== ctx.path) {
             return ctx.redirect(context.router.currentRoute.fullPath)
         }
